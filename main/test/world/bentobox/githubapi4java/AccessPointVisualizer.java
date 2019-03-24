@@ -1,21 +1,10 @@
-package world.bentobox.githubapi4java.test;
+package world.bentobox.githubapi4java;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import world.bentobox.githubapi4java.GitHubBranch;
-import world.bentobox.githubapi4java.GitHubCommit;
-import world.bentobox.githubapi4java.GitHubFileTree;
-import world.bentobox.githubapi4java.GitHubIssue;
-import world.bentobox.githubapi4java.GitHubMilestone;
-import world.bentobox.githubapi4java.GitHubObject;
-import world.bentobox.githubapi4java.GitHubOrganization;
-import world.bentobox.githubapi4java.GitHubPullRequest;
-import world.bentobox.githubapi4java.GitHubRepository;
-import world.bentobox.githubapi4java.GitHubUser;
-import world.bentobox.githubapi4java.GitHubWebAPI;
 import world.bentobox.githubapi4java.RepositoryFeature.State;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
 

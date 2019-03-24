@@ -1,4 +1,4 @@
-package world.bentobox.githubapi4java.test;
+package world.bentobox.githubapi4java;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
