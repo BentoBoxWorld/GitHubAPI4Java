@@ -2,4 +2,10 @@
 .classpath
 .project
 /.settings/
-ACCESS_TOKEN
+*.iml
+/target
+/.DS_Store
+/.idea
+/database/
+/.gitignore
+/dependency-reduced-pom.xml
