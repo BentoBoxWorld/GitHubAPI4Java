@@ -108,7 +108,7 @@ public class GitHubBranch extends GitHubObject {
 	}
 
 	public List<GitHubCommit> getAllCommits() throws IllegalAccessException, UnsupportedEncodingException {
-		List<GitHubCommit> commits = new ArrayList<GitHubCommit>();
+		List<GitHubCommit> commits = new ArrayList<>();
 		
 		int i = 2;
 		List<GitHubCommit> temp = getCommits(1);
@@ -128,7 +128,7 @@ public class GitHubBranch extends GitHubObject {
 	}
 
 	public List<GitHubCommit> getCommits(final int page) throws IllegalAccessException, UnsupportedEncodingException {
-		final Map<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<>();
 		params.put("sha", URLEncoder.encode(this.getName(), "utf-8"));
 		params.put("page", String.valueOf(page));
 		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
@@ -148,7 +148,7 @@ public class GitHubBranch extends GitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubCommit> list = new ArrayList<GitHubCommit>();
+		List<GitHubCommit> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {

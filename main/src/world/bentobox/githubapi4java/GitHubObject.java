@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class GitHubObject extends Object {
+public class GitHubObject {
 	
 	protected GitHubWebAPI api;
 	protected GitHubObject parent;
@@ -180,5 +180,4 @@ public class GitHubObject extends Object {
 	public Map<String, String> getParameters() {
 		return null;
 	}
-	
 }
