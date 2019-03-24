@@ -1,20 +1,22 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 public class GitHubFile extends GitHubObject {
 	
 	protected GitHubRepository repo;
 	
-	public GitHubFile(GitHubWebAPI api, GitHubRepository repo, String suffix) {
+	public GitHubFile(GitHub api, GitHubRepository repo, String suffix) {
 		super(api, repo, suffix);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubFile(GitHubWebAPI api, GitHubRepository repo, String suffix, JsonElement response) {
+	public GitHubFile(GitHub api, GitHubRepository repo, String suffix, JsonElement response) {
 		super(api, repo, suffix);
 		
 		this.repo = repo;

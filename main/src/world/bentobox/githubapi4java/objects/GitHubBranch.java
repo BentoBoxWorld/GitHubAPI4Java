@@ -1,9 +1,11 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -17,14 +19,14 @@ public class GitHubBranch extends GitHubObject {
 	private GitHubRepository repo;
 	private String name;
 	
-	public GitHubBranch(GitHubWebAPI api, GitHubRepository repo, String name) throws UnsupportedEncodingException {
+	public GitHubBranch(GitHub api, GitHubRepository repo, String name) throws UnsupportedEncodingException {
 		super(api, repo, "/branches/" + URLEncoder.encode(name, "utf-8"));
 		
 		this.name = name;
 		this.repo = repo;
 	}
 	
-	public GitHubBranch(GitHubWebAPI api, GitHubRepository repo, String name, JsonElement response) throws UnsupportedEncodingException {
+	public GitHubBranch(GitHub api, GitHubRepository repo, String name, JsonElement response) throws UnsupportedEncodingException {
 		super(api, repo, "/branches/" + URLEncoder.encode(name, "utf-8"));
 
 		this.name = name;
@@ -131,7 +133,7 @@ public class GitHubBranch extends GitHubObject {
 		final Map<String, String> params = new HashMap<>();
 		params.put("sha", URLEncoder.encode(this.getName(), "utf-8"));
 		params.put("page", String.valueOf(page));
-		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
+		params.put("per_page", String.valueOf(GitHub.ITEMS_PER_PAGE));
 		
 		GitHubObject commits = new GitHubObject(api, getRepository(), "/commits") {
 			

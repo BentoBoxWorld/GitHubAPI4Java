@@ -1,9 +1,16 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.GitHubBranch;
+import world.bentobox.githubapi4java.objects.GitHubComment;
+import world.bentobox.githubapi4java.objects.GitHubCommit;
+import world.bentobox.githubapi4java.objects.GitHubDate;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -16,13 +23,13 @@ public class GitHubPullRequest extends RepositoryFeature {
 	
 	GitHubRepository repo;
 	
-	public GitHubPullRequest(GitHubWebAPI api, GitHubRepository repo, int id) {
+	public GitHubPullRequest(GitHub api, GitHubRepository repo, int id) {
 		super(api, repo, "/pulls/" + id);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubPullRequest(GitHubWebAPI api, GitHubRepository repo, int id, JsonElement response) {
+	public GitHubPullRequest(GitHub api, GitHubRepository repo, int id, JsonElement response) {
 		super(api, repo, "/pulls/" + id);
 		
 		this.repo = repo;
@@ -194,7 +201,7 @@ public class GitHubPullRequest extends RepositoryFeature {
 
 	@GitHubAccessPoint(path = "/commits", type = GitHubCommit.class, requiresAccessToken = false)
 	public List<GitHubCommit> getAllCommits() throws IllegalAccessException {
-		List<GitHubCommit> commits = new ArrayList<GitHubCommit>();
+		List<GitHubCommit> commits = new ArrayList<>();
 		
 		int i = 2;
 		List<GitHubCommit> temp = getCommits(1);
@@ -211,7 +218,7 @@ public class GitHubPullRequest extends RepositoryFeature {
 
 	@GitHubAccessPoint(path = "/commits", type = GitHubCommit.class, requiresAccessToken = false)
 	public List<GitHubCommit> getCommits(int page) throws IllegalAccessException {
-		final Map<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<>();
 		params.put("page", String.valueOf(page));
 		params.put("per_page", "100");
 		
@@ -229,7 +236,7 @@ public class GitHubPullRequest extends RepositoryFeature {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubCommit> list = new ArrayList<GitHubCommit>();
+		List<GitHubCommit> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -376,7 +383,7 @@ public class GitHubPullRequest extends RepositoryFeature {
 		}
 		JsonObject response = element.getAsJsonObject();
 		
-		List<GitHubUser> users = new ArrayList<GitHubUser>();
+		List<GitHubUser> users = new ArrayList<>();
 		
 		JsonArray array = response.get("assignees").getAsJsonArray();
 		
@@ -409,7 +416,7 @@ public class GitHubPullRequest extends RepositoryFeature {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubComment> list = new ArrayList<GitHubComment>();
+		List<GitHubComment> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {

@@ -1,20 +1,22 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 public class GitHubFileChange extends GitHubBlob {
 	
 	private JsonObject obj = null;
 	
-	public GitHubFileChange(GitHubWebAPI api, GitHubRepository repo, JsonObject obj) {
+	public GitHubFileChange(GitHub api, GitHubRepository repo, JsonObject obj) {
 		super(api, repo, obj.get("sha").getAsString());
 		
 		this.obj = obj;
 	}
 	
-	public GitHubFileChange(GitHubWebAPI api, GitHubRepository repo, JsonObject obj, JsonElement response) {
+	public GitHubFileChange(GitHub api, GitHubRepository repo, JsonObject obj, JsonElement response) {
 		super(api, repo, obj.get("sha").getAsString(), response);
 		
 		this.obj = obj;

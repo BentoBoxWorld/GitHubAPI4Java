@@ -1,9 +1,24 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.GitHubBranch;
+import world.bentobox.githubapi4java.objects.GitHubComment;
+import world.bentobox.githubapi4java.objects.GitHubCommit;
+import world.bentobox.githubapi4java.objects.GitHubDate;
+import world.bentobox.githubapi4java.objects.GitHubDownload;
+import world.bentobox.githubapi4java.objects.GitHubLabel;
+import world.bentobox.githubapi4java.objects.GitHubLanguage;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.GitHubReference;
+import world.bentobox.githubapi4java.objects.GitHubTag;
+import world.bentobox.githubapi4java.objects.UniqueGitHubObject;
+import world.bentobox.githubapi4java.objects.user.GitHubCollaborator;
+import world.bentobox.githubapi4java.objects.user.GitHubContributor;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -16,13 +31,13 @@ public class GitHubRepository extends UniqueGitHubObject {
 	
 	String fullname = null;
 	
-	public GitHubRepository(GitHubWebAPI api, String username, String repo) {
+	public GitHubRepository(GitHub api, String username, String repo) {
 		super(api, null, "repos/" + username + "/" + repo);
 		
 		this.fullname = username + "/" + repo;
 	}
 	
-	public GitHubRepository(GitHubWebAPI api, String name) {
+	public GitHubRepository(GitHub api, String name) {
 		super(api, null, "repos/" + name);
 		
 		this.fullname = name;
@@ -32,7 +47,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 		super(obj);
 	}
 	
-	public GitHubRepository(GitHubWebAPI api, String name, JsonElement response) {
+	public GitHubRepository(GitHub api, String name, JsonElement response) {
 		super(api, null, "repos/" + name);
 		
 		this.fullname = name;
@@ -51,7 +66,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 
 	@GitHubAccessPoint(path = "/forks", type = GitHubRepository.class, requiresAccessToken = false)
 	public List<GitHubRepository> getAllForks() throws IllegalAccessException {
-		List<GitHubRepository> forks = new ArrayList<GitHubRepository>();
+		List<GitHubRepository> forks = new ArrayList<>();
 		
 		int i = 2;
 		List<GitHubRepository> temp = getForks(1);
@@ -68,9 +83,9 @@ public class GitHubRepository extends UniqueGitHubObject {
 
 	@GitHubAccessPoint(path = "/forks", type = GitHubRepository.class, requiresAccessToken = false)
 	public List<GitHubRepository> getForks(final int page) throws IllegalAccessException {
-		final Map<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<>();
 		params.put("page", String.valueOf(page));
-		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
+		params.put("per_page", String.valueOf(GitHub.ITEMS_PER_PAGE));
 		
 		GitHubObject forks = new GitHubObject(api, this, "/forks") {
 			
@@ -87,7 +102,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubRepository> list = new ArrayList<GitHubRepository>();
+		List<GitHubRepository> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -107,7 +122,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 
 	@GitHubAccessPoint(path = "/branches", type = GitHubBranch.class, requiresAccessToken = false)
 	public List<GitHubBranch> getAllBranches() throws IllegalAccessException, UnsupportedEncodingException {
-		List<GitHubBranch> branches = new ArrayList<GitHubBranch>();
+		List<GitHubBranch> branches = new ArrayList<>();
 		
 		int i = 2;
 		List<GitHubBranch> temp = getBranches(1);
@@ -124,9 +139,9 @@ public class GitHubRepository extends UniqueGitHubObject {
 
 	@GitHubAccessPoint(path = "/branches", type = GitHubBranch.class, requiresAccessToken = false)
 	public List<GitHubBranch> getBranches(final int page) throws IllegalAccessException, UnsupportedEncodingException {
-		final Map<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<>();
 		params.put("page", String.valueOf(page));
-		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
+		params.put("per_page", String.valueOf(GitHub.ITEMS_PER_PAGE));
 		GitHubObject branches = new GitHubObject(api, this, "/branches") {
 			
 			@Override
@@ -141,7 +156,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + branches.getURL() + "'");
 		}
 		
-		List<GitHubBranch> list = new ArrayList<GitHubBranch>();
+		List<GitHubBranch> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -163,7 +178,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubUser> list = new ArrayList<GitHubUser>();
+		List<GitHubUser> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -330,7 +345,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 	public List<GitHubCommit> getCommits(final int page) throws IllegalAccessException {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("page", String.valueOf(page));
-		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
+		params.put("per_page", String.valueOf(GitHub.ITEMS_PER_PAGE));
 		
 		GitHubObject commits = new GitHubObject(api, this, "/commits") {
 			
@@ -364,7 +379,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 	public List<GitHubCommit> getCommits(final int page, final GitHubUser author) throws IllegalAccessException {
 		final Map<String, String> params = new HashMap<String, String>();
 		params.put("page", String.valueOf(page));
-		params.put("per_page", String.valueOf(GitHubWebAPI.ITEMS_PER_PAGE));
+		params.put("per_page", String.valueOf(GitHub.ITEMS_PER_PAGE));
 		params.put("author", author.getUsername());
 		
 		GitHubObject commits = new GitHubObject(api, this, "/commits") {
@@ -1085,15 +1100,15 @@ public class GitHubRepository extends UniqueGitHubObject {
 		return new GitHubIssue(api, this, number);
 	}
 
-	public GitHubPullRequest getPullRequest(int number) throws IllegalAccessException {
+	public GitHubPullRequest getPullRequest(int number) {
 		return new GitHubPullRequest(api, this, number);
 	}
 
-	public GitHubMilestone getMilestone(int number) throws IllegalAccessException {
+	public GitHubMilestone getMilestone(int number) {
 		return new GitHubMilestone(api, this, number);
 	}
 
-	public GitHubLabel getLabel(String name) throws IllegalAccessException, UnsupportedEncodingException {
+	public GitHubLabel getLabel(String name) throws UnsupportedEncodingException {
 		return new GitHubLabel(api, this, name);
 	}
 
@@ -1118,7 +1133,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubReference> list = new ArrayList<GitHubReference>();
+		List<GitHubReference> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -1140,7 +1155,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubTag> list = new ArrayList<GitHubTag>();
+		List<GitHubTag> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {
@@ -1162,7 +1177,7 @@ public class GitHubRepository extends UniqueGitHubObject {
 			throw new IllegalAccessException("Could not connect to '" + getURL() + "'");
 		}
 		
-		List<GitHubComment> list = new ArrayList<GitHubComment>();
+		List<GitHubComment> list = new ArrayList<>();
 		JsonArray array = response.getAsJsonArray();
 		
 		for (int i = 0; i < array.size(); i++) {

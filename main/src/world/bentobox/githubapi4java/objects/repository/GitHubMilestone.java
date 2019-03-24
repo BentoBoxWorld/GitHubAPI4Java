@@ -1,9 +1,14 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.GitHubDate;
+import world.bentobox.githubapi4java.objects.GitHubLabel;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -14,13 +19,13 @@ public class GitHubMilestone extends RepositoryFeature {
 	
 	GitHubRepository repo;
 	
-	public GitHubMilestone(GitHubWebAPI api, GitHubRepository repo, int id) {
+	public GitHubMilestone(GitHub api, GitHubRepository repo, int id) {
 		super(api, repo, "/milestones/" + id);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubMilestone(GitHubWebAPI api, GitHubRepository repo, int id, JsonElement response) {
+	public GitHubMilestone(GitHub api, GitHubRepository repo, int id, JsonElement response) {
 		super(api, repo, "/milestones/" + id);
 		
 		this.repo = repo;

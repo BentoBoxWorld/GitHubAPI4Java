@@ -7,6 +7,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import world.bentobox.githubapi4java.extra.Base64url;
 import world.bentobox.githubapi4java.extra.CacheMode;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.GitHubOrganization;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,22 +27,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GitHubWebAPI {
+public class GitHub {
 	
 	private String token = "";
-	protected String hard_drive_cache = null;
-	protected CacheMode cache_mode;
-	public Map<String, JsonElement> cache = new HashMap<String, JsonElement>();
+	private String hardDriveCache = null;
+	private CacheMode cacheMode;
+	public Map<String, JsonElement> cache = new HashMap<>();
 	
 	public static int ITEMS_PER_PAGE = 100;
 	
-	public GitHubWebAPI() {
-		this.cache_mode = CacheMode.RAM_CACHE;
+	public GitHub() {
+		this.cacheMode = CacheMode.RAM_CACHE;
 	}
 	
-	public GitHubWebAPI(String access_token) {
-		this.token = access_token;
-		this.cache_mode = CacheMode.RAM_CACHE;
+	public GitHub(String accessToken) {
+		this.token = accessToken;
+		this.cacheMode = CacheMode.RAM_CACHE;
 	}
 	
 	public String getAccessToken() {
@@ -150,9 +154,9 @@ public class GitHubWebAPI {
 	}
 
 	public void cache(String url, JsonElement response) {
-		switch(this.cache_mode) {
+		switch(this.cacheMode) {
 			case HARD_DRIVE_CACHE: {
-				if (hard_drive_cache != null) {
+				if (hardDriveCache != null) {
 					try {
 						saveHardDriveCache(Base64url.encode(url) + ".json", response);
 					} catch (FileNotFoundException e) {
@@ -164,7 +168,7 @@ public class GitHubWebAPI {
 			case RAM_AND_HARD_DRIVE_CACHE: {
 				cache.put(url, response);
 				
-				if (hard_drive_cache != null) {
+				if (hardDriveCache != null) {
 					try {
 						saveHardDriveCache(Base64url.encode(url) + ".json", response);
 					} catch (FileNotFoundException e) {
@@ -183,9 +187,9 @@ public class GitHubWebAPI {
 		}
 	}
 	
-	protected JsonElement readHardDriveCache(String file) throws IOException {
-		if (new File(hard_drive_cache + file).exists()) {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(hard_drive_cache + file)), StandardCharsets.UTF_8));
+	public JsonElement readHardDriveCache(String file) throws IOException {
+		if (new File(hardDriveCache + file).exists()) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(hardDriveCache + file)), StandardCharsets.UTF_8));
 			
 			String data = reader.readLine();
 			
@@ -198,7 +202,7 @@ public class GitHubWebAPI {
 	
 	protected void saveHardDriveCache(String file, JsonElement json) throws FileNotFoundException {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-	    PrintWriter writer = new PrintWriter(hard_drive_cache + file);
+	    PrintWriter writer = new PrintWriter(hardDriveCache + file);
 	    writer.println(gson.toJson(json));
 	    writer.close();
 	}
@@ -207,14 +211,18 @@ public class GitHubWebAPI {
 		File dir = new File(path);
 		if (!dir.exists()) dir.mkdirs();
 		
-		this.hard_drive_cache = path + "/";
+		this.hardDriveCache = path + "/";
 	}
-	
+
+	public String getHardDriveCache() {
+		return hardDriveCache;
+	}
+
 	public void setCacheMode(CacheMode mode) {
-		this.cache_mode = mode;
+		this.cacheMode = mode;
 	}
 	
 	public CacheMode getCacheMode() {
-		return this.cache_mode;
+		return this.cacheMode;
 	}
 }

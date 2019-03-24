@@ -1,4 +1,4 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

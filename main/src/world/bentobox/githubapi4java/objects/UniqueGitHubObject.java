@@ -1,14 +1,15 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
 
 import java.util.Date;
 
 public class UniqueGitHubObject extends GitHubObject {
 
-	public UniqueGitHubObject(GitHubWebAPI api, GitHubObject parent, String suffix) {
+	public UniqueGitHubObject(GitHub api, GitHubObject parent, String suffix) {
 		super(api, parent, suffix);
 	}
 

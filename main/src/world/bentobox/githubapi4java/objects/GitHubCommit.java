@@ -1,10 +1,13 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
 import world.bentobox.githubapi4java.extra.RepositorySnapshot;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,13 +17,13 @@ public class GitHubCommit extends GitHubObject {
 	
 	GitHubRepository repo;
 	
-	public GitHubCommit(GitHubWebAPI api, GitHubRepository repo, String id) {
+	public GitHubCommit(GitHub api, GitHubRepository repo, String id) {
 		super(api, repo, "/commits/" + id);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubCommit(GitHubWebAPI api, GitHubRepository repo, String id, JsonElement response) {
+	public GitHubCommit(GitHub api, GitHubRepository repo, String id, JsonElement response) {
 		super(api, repo, "/commits/" + id);
 		
 		this.repo = repo;

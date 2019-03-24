@@ -1,9 +1,9 @@
 package world.bentobox.githubapi4java.extra;
 
-import world.bentobox.githubapi4java.GitHubCommit;
-import world.bentobox.githubapi4java.GitHubFile;
-import world.bentobox.githubapi4java.GitHubRepository;
-import world.bentobox.githubapi4java.GitHubUser;
+import world.bentobox.githubapi4java.objects.GitHubCommit;
+import world.bentobox.githubapi4java.objects.GitHubFile;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.util.ArrayList;
 import java.util.List;

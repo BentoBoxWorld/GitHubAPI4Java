@@ -1,7 +1,8 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
 import world.bentobox.githubapi4java.extra.Base64url;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class GitHubObject {
 	
-	protected GitHubWebAPI api;
+	protected GitHub api;
 	protected GitHubObject parent;
 	protected String suffix;
 	
@@ -20,7 +21,7 @@ public class GitHubObject {
 	
 	private boolean debug = false;
 
-	public GitHubObject(GitHubWebAPI api, GitHubObject parent, String suffix) {
+	public GitHubObject(GitHub api, GitHubObject parent, String suffix) {
 		this.api = api;
 		this.parent = parent;
 		this.suffix = suffix;
@@ -105,7 +106,7 @@ public class GitHubObject {
 			log(" Returned globally cached (full!) version.");
 			response = api.cache.get(getFullURL());
 		}
-		else if (api.hard_drive_cache != null && new File(api.hard_drive_cache + Base64url.encode(getFullURL()) + ".json").exists()) {
+		else if (api.getHardDriveCache() != null && new File(api.getHardDriveCache() + Base64url.encode(getFullURL()) + ".json").exists()) {
 			log(" Returned hard drive cached (full!) version.");
 			try {
 				response = api.readHardDriveCache(Base64url.encode(getFullURL()) + ".json");
@@ -168,9 +169,7 @@ public class GitHubObject {
 	
 	public void clearCache() {
 		String url = getFullURL();
-		if (api.cache.containsKey(url)) {
-			api.cache.remove(url);
-		}
+		api.cache.remove(url);
 		
 		if (response != null) {
 			response = null;

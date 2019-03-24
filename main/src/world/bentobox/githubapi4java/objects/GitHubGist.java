@@ -1,18 +1,20 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.util.Date;
 
 public class GitHubGist extends GitHubObject {
 	
-	public GitHubGist(GitHubWebAPI api, String id) {
+	public GitHubGist(GitHub api, String id) {
 		super(api, null, "gists/" + id);
 	}
 	
-	public GitHubGist(GitHubWebAPI api, String id, JsonElement response) {
+	public GitHubGist(GitHub api, String id, JsonElement response) {
 		super(api, null, "gists/" + id);
 		
 		this.minimal = response;

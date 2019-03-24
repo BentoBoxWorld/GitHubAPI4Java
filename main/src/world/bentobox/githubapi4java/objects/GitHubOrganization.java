@@ -1,20 +1,23 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GitHubOrganization extends UniqueGitHubObject {
 	
-	public GitHubOrganization(GitHubWebAPI api, String name) {
+	public GitHubOrganization(GitHub api, String name) {
 		super(api, null, "orgs/" + name);
 	}
 	
-	public GitHubOrganization(GitHubWebAPI api, String name, JsonElement response) {
+	public GitHubOrganization(GitHub api, String name, JsonElement response) {
 		super(api, null, "orgs/" + name);
 		
 		this.minimal = response;

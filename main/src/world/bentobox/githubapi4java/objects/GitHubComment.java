@@ -1,16 +1,19 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 public class GitHubComment extends UniqueGitHubObject {
 	
-	public GitHubComment(GitHubWebAPI api, GitHubRepository repo, int id) {
+	public GitHubComment(GitHub api, GitHubRepository repo, int id) {
 		super(api, repo, "/comments/" + id);
 	}
 	
-	public GitHubComment(GitHubWebAPI api, GitHubRepository repo, int id, JsonElement response) {
+	public GitHubComment(GitHub api, GitHubRepository repo, int id, JsonElement response) {
 		super(api, repo, "/comments/" + id);
 		
 		this.minimal = response;

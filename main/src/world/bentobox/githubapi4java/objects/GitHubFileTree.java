@@ -1,9 +1,11 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +16,7 @@ public class GitHubFileTree extends GitHubFile {
 	
 	private Map<String, String> params = new HashMap<String, String>();
 	
-	public GitHubFileTree(GitHubWebAPI api, GitHubRepository repo, String id, boolean recursive) {
+	public GitHubFileTree(GitHub api, GitHubRepository repo, String id, boolean recursive) {
 		super(api, repo, "/git/trees/" + id);
 		
 		if (recursive) {
@@ -22,7 +24,7 @@ public class GitHubFileTree extends GitHubFile {
 		}
 	}
 	
-	public GitHubFileTree(GitHubWebAPI api, GitHubRepository repo, String id, JsonElement response, boolean recursive) {
+	public GitHubFileTree(GitHub api, GitHubRepository repo, String id, JsonElement response, boolean recursive) {
 		super(api, repo, "/git/trees/" + id, response);
 		
 		if (recursive) {

@@ -1,21 +1,23 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 public class GitHubLanguage extends GitHubObject {
 
 	private String name;
 	private GitHubRepository repo;
 	
-	public GitHubLanguage(GitHubWebAPI api, GitHubRepository repo, String name) {
+	public GitHubLanguage(GitHub api, GitHubRepository repo, String name) {
 		super(api, repo, "/languages");
 		
 		this.name = name;
 		this.repo = repo;
 	}
 	
-	public GitHubLanguage(GitHubWebAPI api, GitHubRepository repo, String name, JsonElement response) {
+	public GitHubLanguage(GitHub api, GitHubRepository repo, String name, JsonElement response) {
 		super(api, repo, "/languages");
 		
 		this.name = name;

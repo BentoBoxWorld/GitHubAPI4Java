@@ -1,9 +1,14 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects.repository;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.GitHubComment;
+import world.bentobox.githubapi4java.objects.GitHubLabel;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.user.GitHubUser;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -13,13 +18,13 @@ public class GitHubIssue extends RepositoryFeature {
 	
 	private GitHubRepository repo;
 	
-	public GitHubIssue(GitHubWebAPI api, GitHubRepository repo, int number) {
+	public GitHubIssue(GitHub api, GitHubRepository repo, int number) {
 		super(api, repo, "/issues/" + number);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubIssue(GitHubWebAPI api, GitHubRepository repo, int number, JsonElement response) {
+	public GitHubIssue(GitHub api, GitHubRepository repo, int number, JsonElement response) {
 		super(api, repo, "/issues/" + number);
 
 		this.repo = repo;

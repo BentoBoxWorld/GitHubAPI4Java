@@ -1,9 +1,15 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects.user;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.GitHubGist;
+import world.bentobox.githubapi4java.objects.GitHubObject;
+import world.bentobox.githubapi4java.objects.GitHubOrganization;
+import world.bentobox.githubapi4java.objects.UniqueGitHubObject;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +18,13 @@ public class GitHubUser extends UniqueGitHubObject {
 	
 	private String username;
 
-	public GitHubUser(GitHubWebAPI api, String username) {
+	public GitHubUser(GitHub api, String username) {
 		super(api, null, "users/" + username);
 		
 		this.username = username;
 	}
 
-	public GitHubUser(GitHubWebAPI api, String username, JsonElement response) {
+	public GitHubUser(GitHub api, String username, JsonElement response) {
 		super(api, null, "users/" + username);
 		
 		this.username = username;

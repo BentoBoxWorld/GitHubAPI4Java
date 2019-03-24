@@ -1,18 +1,20 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 import java.util.Date;
 
 public class GitHubDownload extends GitHubObject {
 	
-	public GitHubDownload(GitHubWebAPI api, GitHubRepository repo, int id) {
+	public GitHubDownload(GitHub api, GitHubRepository repo, int id) {
 		super(api, repo, "/downloads/" + id);
 	}
 	
-	public GitHubDownload(GitHubWebAPI api, GitHubRepository repo, int id, JsonElement response) {
+	public GitHubDownload(GitHub api, GitHubRepository repo, int id, JsonElement response) {
 		super(api, repo, "/downloads/" + id);
 		
 		this.minimal = response;

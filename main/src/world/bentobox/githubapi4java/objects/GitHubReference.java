@@ -1,20 +1,22 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 public class GitHubReference extends GitHubObject {
 	
 	GitHubRepository repo;
 	
-	public GitHubReference(GitHubWebAPI api, GitHubRepository repo, String id) {
+	public GitHubReference(GitHub api, GitHubRepository repo, String id) {
 		super(api, repo, "/git/refs/" + id);
 		
 		this.repo = repo;
 	}
 	
-	public GitHubReference(GitHubWebAPI api, GitHubRepository repo, String id, JsonElement response) {
+	public GitHubReference(GitHub api, GitHubRepository repo, String id, JsonElement response) {
 		super(api, repo, "/git/refs/" + id);
 		
 		this.repo = repo;

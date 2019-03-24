@@ -1,20 +1,22 @@
-package world.bentobox.githubapi4java;
+package world.bentobox.githubapi4java.objects;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import world.bentobox.githubapi4java.GitHub;
 import world.bentobox.githubapi4java.annotations.GitHubAccessPoint;
+import world.bentobox.githubapi4java.objects.repository.GitHubRepository;
 
 public class GitHubTag extends GitHubObject {
 	
 	GitHubRepository repo;
 	
-	public GitHubTag(GitHubWebAPI api, GitHubRepository repo) {
+	public GitHubTag(GitHub api, GitHubRepository repo) {
 		super(api, repo, "/tags");
 		
 		this.repo = repo;
 	}
 	
-	public GitHubTag(GitHubWebAPI api, GitHubRepository repo, JsonElement response) {
+	public GitHubTag(GitHub api, GitHubRepository repo, JsonElement response) {
 		super(api, repo, "/tags");
 		
 		this.repo = repo;
