@@ -94,7 +94,7 @@ public class GitHub {
 			
 			HttpURLConnection connection = (HttpURLConnection) website.openConnection();
 	        connection.setConnectTimeout(5000);
-	        connection.addRequestProperty("User-Agent", "GitHub Web API 4 Java (by TheBusyBiscuit)");
+	        connection.addRequestProperty("User-Agent", "GitHub API 4 Java (by TheBusyBiscuit and BentoBoxWorld)");
 	        connection.setDoOutput(true);
 			
 	        if (connection.getResponseCode() == 200) {
